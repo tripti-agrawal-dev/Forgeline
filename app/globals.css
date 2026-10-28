@@ -1,0 +1,13 @@
+@tailwind base;@tailwind components;@tailwind utilities;
+:root{color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{background:#06080d;color:#e8ecf4;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2px solid #22d3ee;outline-offset:3px;border-radius:6px}
+.spot{position:relative;overflow:hidden}
+.spot::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .2s;pointer-events:none;background:radial-gradient(420px circle at var(--x,50%) var(--y,50%),rgba(34,211,238,.14),transparent 60%)}
+.spot:hover::before{opacity:1}
+.grid-bg{background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 75%)}
+.grad-text{background:linear-gradient(100deg,#fff 20%,#7dd3fc 55%,#3b82f6);-webkit-background-clip:text;background-clip:text;color:transparent}
+@keyframes down{from{height:0}to{height:var(--radix-accordion-content-height)}}
+@keyframes up{from{height:var(--radix-accordion-content-height)}to{height:0}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
