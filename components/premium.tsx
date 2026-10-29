@@ -6,8 +6,9 @@ import { ArrowUpRight, ChevronDown, Hexagon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ServiceArt } from "@/components/visuals";
 import Hero3DLoader from "@/components/Hero3DLoader";
+import { asset } from "@/lib/assets";
 
-const A = "/images/night-blue.jpg", B = "/images/dark-pair.jpg";
+const A = asset("/images/night-blue.jpg"), B = asset("/images/dark-pair.jpg");
 
 export function Hero() {
   const r = useReducedMotion();
@@ -46,10 +47,10 @@ export function Hero() {
 const svc: [string, string, string?, string?][] = [
   ["AI & Automation", "Connect systems and introduce evaluated automation.", A, "60% 40%"],
   ["Web Development", "Interfaces, services and data models built to be maintained.", B, "35% 50%"],
-  ["Mobile Applications", "Products people use every day, from first release onward.", "/images/mobile.jpg", "50% 35%"],
-  ["SaaS Development", "Tenancy, billing and onboarding designed together.", "/images/saas.jpg", "30% 50%"],
-  ["Cloud Engineering", "Releases, infrastructure and system change, planned.", "/images/cloud.jpg", "50% 40%"],
-  ["UI/UX Design", "Flows and interfaces reviewed before engineering begins.", "/images/uiux.jpg", "60% 50%"],
+  ["Mobile Applications", "Products people use every day, from first release onward.", asset("/images/mobile.jpg"), "50% 35%"],
+  ["SaaS Development", "Tenancy, billing and onboarding designed together.", asset("/images/saas.jpg"), "30% 50%"],
+  ["Cloud Engineering", "Releases, infrastructure and system change, planned.", asset("/images/cloud.jpg"), "50% 40%"],
+  ["UI/UX Design", "Flows and interfaces reviewed before engineering begins.", asset("/images/uiux.jpg"), "60% 50%"],
 ];
 export function ServiceCards() {
   const layout = ["lg:col-span-2 lg:row-span-2 min-h-[380px]", "min-h-[260px]", "min-h-[260px]", "min-h-[260px]", "min-h-[260px]", "min-h-[260px]"];

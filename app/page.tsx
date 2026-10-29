@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import { Assistant, Ecosystem, Hero, Journey, ServiceCards } from "@/components/premium";
 import { Reveal } from "@/components/motion-kit";
 import ScrollFX from "@/components/ScrollFX";
+import { asset } from "@/lib/assets";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
@@ -65,7 +66,7 @@ export default function Home() {
           <Accordion type="multiple" className="mt-8">{faqs.map(([q, a]) => <AccordionItem key={q} value={q}><AccordionTrigger>{q}</AccordionTrigger><AccordionContent>{a}</AccordionContent></AccordionItem>)}</Accordion></div></section>
 
         <section id="contact" className="relative isolate overflow-hidden py-28 md:py-44">
-          <Image src="/images/dark-pair.jpg" alt="" fill sizes="100vw" className="-z-10 object-cover" />
+          <Image src={asset("/images/dark-pair.jpg")} alt="" fill sizes="100vw" className="-z-10 object-cover" />
           <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/80 to-ink/60" />
           <Reveal className="mx-auto max-w-4xl px-6 text-center">
             <h2 className="text-balance font-serif text-4xl leading-tight md:text-7xl">Your next big idea deserves <em className="text-gold">extraordinary</em> engineering.</h2>
