@@ -1,7 +1,7 @@
 @tailwind base;@tailwind components;@tailwind utilities;
 :root{color-scheme:dark}
 html{scroll-behavior:smooth;scroll-padding-top:96px}
-body{background:#06080d;color:#e8ecf4;-webkit-font-smoothing:antialiased}
+body{background:#080d18;color:#e8ecf4;-webkit-font-smoothing:antialiased}
 :focus-visible{outline:2px solid #22d3ee;outline-offset:3px;border-radius:6px}
 .spot{position:relative;overflow:hidden}
 .spot::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .2s;pointer-events:none;background:radial-gradient(420px circle at var(--x,50%) var(--y,50%),rgba(34,211,238,.14),transparent 60%)}
@@ -11,3 +11,4 @@ body{background:#06080d;color:#e8ecf4;-webkit-font-smoothing:antialiased}
 @keyframes down{from{height:0}to{height:var(--radix-accordion-content-height)}}
 @keyframes up{from{height:var(--radix-accordion-content-height)}to{height:0}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+@keyframes marquee{to{transform:translateX(-50%)}}

@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Menu, X, Hexagon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-const links = [["Services", "#services"], ["Solutions", "#value"], ["Industries", "#industries"], ["Technologies", "#tech"], ["Process", "#process"], ["Resources", "#faq"]];
+const links = [["Services", "#services"], ["Process", "#process"], ["Technology", "#tech"], ["Idea Assistant", "#assistant"], ["FAQ", "#faq"]];
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
   useEffect(() => { const f = () => setSolid(scrollY > 24); f(); addEventListener("scroll", f, { passive: true }); return () => removeEventListener("scroll", f); }, []);
   return (
-    <header className={`sticky top-0 z-40 transition-all duration-200 ${solid ? "border-b border-white/10 bg-ink/75 backdrop-blur-xl" : "border-b border-transparent"}`}>
+    <header className={`fixed inset-x-0 top-0 z-40 transition-all duration-200 ${solid ? "border-b border-white/10 bg-ink/75 backdrop-blur-xl" : "border-b border-transparent"}`}>
       <div className="mx-auto flex h-16 max-w-wrap items-center justify-between px-4 md:h-20 md:px-6">
         <a href="#top" aria-label="Forgeline home" className="flex items-center gap-2 text-lg font-semibold tracking-tight"><Hexagon className="size-6 text-accent" aria-hidden />Forgeline</a>
         <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
