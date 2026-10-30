@@ -16,9 +16,9 @@ export default function Hero3D() {
     scene.add(g);
     const mk = (geo: THREE.BufferGeometry, color: number, opacity: number) =>
       new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color, wireframe: true, transparent: true, opacity }));
-    const shell = mk(new THREE.IcosahedronGeometry(1.9, 2), 0x2563eb, 0.5);
-    const core = mk(new THREE.OctahedronGeometry(0.95, 0), 0x22d3ee, 0.9);
-    const ring = mk(new THREE.TorusGeometry(2.7, 0.012, 8, 160), 0x7dd3fc, 0.6);
+    const shell = mk(new THREE.IcosahedronGeometry(1.9, 2), 0x34d399, 0.5);
+    const core = mk(new THREE.OctahedronGeometry(0.95, 0), 0xa7f3d0, 0.9);
+    const ring = mk(new THREE.TorusGeometry(2.7, 0.012, 8, 160), 0xffffff, 0.6);
     ring.rotation.x = 1.2;
     const n = 700, pos = new Float32Array(n * 3);
     for (let i = 0; i < n; i++) {
@@ -27,7 +27,7 @@ export default function Hero3D() {
     }
     const pg = new THREE.BufferGeometry();
     pg.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-    const pts = new THREE.Points(pg, new THREE.PointsMaterial({ color: 0x93c5fd, size: 0.022, transparent: true, opacity: 0.8 }));
+    const pts = new THREE.Points(pg, new THREE.PointsMaterial({ color: 0xd1fae5, size: 0.022, transparent: true, opacity: 0.8 }));
     g.add(shell, core, ring, pts);
     const size = () => { const { clientWidth: w, clientHeight: h } = el; r.setSize(w, h); cam.aspect = w / h; cam.updateProjectionMatrix(); };
     size();
