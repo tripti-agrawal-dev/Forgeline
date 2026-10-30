@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowUpRight, ChevronDown, Hexagon } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, ChevronDown, Hexagon, ShieldCheck, Sparkles, Target, X, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ServiceArt } from "@/components/visuals";
 import Hero3DLoader from "@/components/Hero3DLoader";
@@ -155,26 +155,73 @@ function blueprint(text: string) {
   modules.push("Admin and reporting");
   return { modules, tech, phases: ["Discovery sprint", "Design and architecture", "Build in reviewed sprints", "Testing and launch"], q: ["Who are the first users?", "Which existing tools must it connect to?", "What must the first release include?"] };
 }
+const assistFeatures = [
+  { Icon: Zap, a: "Fast", b: "Results" },
+  { Icon: Target, a: "Accurate", b: "Suggestions" },
+  { Icon: ShieldCheck, a: "Build With", b: "Confidence" },
+];
+const assistSteps = ["Project Overview", "Key Features", "Tech Stack", "Timeline & Steps"];
+
+function Tick() {
+  return <span className="grid size-6 shrink-0 place-items-center rounded-full bg-accent text-white"><Check className="size-3.5" strokeWidth={3} aria-hidden /></span>;
+}
+
 export function Assistant() {
-  const [v, setV] = useState(""); const [out, setOut] = useState<ReturnType<typeof blueprint> | null>(null);
+  const [v, setV] = useState("");
+  const [idea, setIdea] = useState("");
+  const [out, setOut] = useState<ReturnType<typeof blueprint> | null>(null);
+  const ok = v.trim().length >= 8;
+  const submit = () => { if (!ok) return; setIdea(v.trim()); setOut(blueprint(v)); };
   return (
-    <div className="grid gap-8 lg:grid-cols-2">
-      <div>
-        <label htmlFor="idea" className="mb-3 block text-lg text-white">Describe what you want to build</label>
-        <textarea id="idea" value={v} onChange={(e) => setV(e.target.value)} placeholder="I want to build an AI-powered HR management system." className="min-h-36 w-full rounded-xl border border-ink/15 bg-white p-4 text-ink placeholder:text-ink/40" />
-        <Button className="mt-4 w-full bg-white text-ink hover:bg-emerald-200 sm:w-auto" disabled={v.trim().length < 8} onClick={() => setOut(blueprint(v))}>Generate Blueprint</Button>
-        <p className="mt-3 text-xs text-white/55">A quick preview built in your browser. Nothing is sent anywhere.</p>
+    <div className="relative grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+      <div className="pointer-events-none absolute -right-16 top-1/2 hidden size-[460px] -translate-y-1/2 rounded-full bg-emerald-300/15 blur-[120px] lg:block" aria-hidden />
+
+      <div className="relative">
+        <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 font-mono text-[11px] tracking-widest text-emerald-200"><span className="size-1.5 rounded-full bg-emerald-300" />PROJECT IDEA ASSISTANT</p>
+        <h2 className="mt-5 max-w-xl text-balance font-serif text-4xl font-extrabold leading-[1.05] md:text-6xl">Have an idea? Let’s shape it.</h2>
+        <p className="mt-5 max-w-md text-[15px] leading-7 text-white/70">Share what you have in mind and get a starter blueprint with key features, a suggested tech stack and a delivery roadmap.</p>
+
+        <ul className="mt-7 flex flex-wrap gap-x-7 gap-y-4">
+          {assistFeatures.map(({ Icon, a, b }) => (
+            <li key={a} className="flex items-center gap-3">
+              <span className="grid size-10 place-items-center rounded-xl border border-white/15 bg-white/5 text-emerald-200"><Icon className="size-[18px]" aria-hidden /></span>
+              <span className="text-xs font-medium leading-4 text-white/80">{a}<br />{b}</span>
+            </li>
+          ))}
+        </ul>
+
+        <form onSubmit={(e) => { e.preventDefault(); submit(); }} className="mt-9 flex items-center gap-2 rounded-full bg-white p-2 pl-5 shadow-[0_20px_60px_rgba(0,0,0,.35)]">
+          <label htmlFor="idea" className="sr-only">Describe what you want to build</label>
+          <Sparkles className="size-5 shrink-0 text-accent" aria-hidden />
+          <input id="idea" value={v} onChange={(e) => setV(e.target.value)} placeholder="I want to build an AI-powered HR management system." className="min-w-0 flex-1 bg-transparent px-1 py-3 text-[15px] text-ink outline-none placeholder:text-ink/40" />
+          <button type="submit" disabled={!ok} aria-label="Generate Blueprint" className="grid size-12 shrink-0 place-items-center rounded-full bg-ink text-white transition-all hover:bg-accent active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"><ArrowRight className="size-5" aria-hidden /></button>
+        </form>
+        <div className="mt-3 flex items-center justify-between gap-4 pl-5">
+          <p className="text-xs text-white/55">A quick preview built in your browser. Nothing is sent anywhere.</p>
+          <p className="hidden -rotate-3 items-center gap-1 font-serif text-sm italic text-emerald-200 sm:flex" aria-hidden>Big ideas start here <ArrowRight className="size-4" /></p>
+        </div>
       </div>
-      <div className="min-h-48 rounded-2xl border border-ink/10 bg-white p-6 shadow-sm" aria-live="polite">
-        {!out ? <p className="text-ink/50">Your product blueprint will appear here.</p> : (
+
+      <div className="relative rounded-3xl border border-white/30 bg-white/95 p-6 text-ink shadow-[0_30px_80px_rgba(0,0,0,.45)] backdrop-blur md:p-7" aria-live="polite">
+        <div className="mb-5 flex items-center justify-between">
+          <p className="text-lg font-semibold">Your Project Blueprint</p>
+          {out && <button type="button" onClick={() => { setOut(null); setV(""); setIdea(""); }} aria-label="Clear blueprint" className="grid size-8 place-items-center rounded-full text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"><X className="size-4" aria-hidden /></button>}
+        </div>
+        {!out ? (
+          <>
+            <ul className="space-y-4">{assistSteps.map((s) => <li key={s} className="flex items-center gap-3 text-[15px]"><Tick />{s}</li>)}</ul>
+            <p className="mt-6 border-t border-ink/10 pt-4 text-sm text-ink/50">Your product blueprint will appear here.</p>
+          </>
+        ) : (
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="space-y-5 text-[15px]">
-            <p className="font-serif text-2xl">Your Product Blueprint</p>
-            <div><p className="font-mono text-xs text-accent">SUGGESTED MODULES</p><ul className="mt-2 list-disc space-y-1 pl-5">{out.modules.map((m) => <li key={m}>{m}</li>)}</ul></div>
-            <div><p className="font-mono text-xs text-accent">POSSIBLE TECHNOLOGIES</p><p className="mt-2">{out.tech.join(" · ")}</p></div>
-            <div><p className="font-mono text-xs text-accent">PHASES</p><p className="mt-2">{out.phases.join(" → ")}</p></div>
-            <div><p className="font-mono text-xs text-accent">QUESTIONS TO SCOPE IT</p><ul className="mt-2 list-disc space-y-1 pl-5">{out.q.map((m) => <li key={m}>{m}</li>)}</ul></div>
+            <div><p className="flex items-center gap-3 font-semibold"><Tick />Project Overview</p><p className="mt-2 pl-9 text-ink/70">{idea}</p></div>
+            <div><p className="flex items-center gap-3 font-semibold"><Tick />Key Features</p><ul className="mt-2 list-disc space-y-1 pl-14 text-ink/70">{out.modules.map((m) => <li key={m}>{m}</li>)}</ul></div>
+            <div><p className="flex items-center gap-3 font-semibold"><Tick />Tech Stack</p><p className="mt-2 pl-9 text-ink/70">{out.tech.join(" · ")}</p></div>
+            <div><p className="flex items-center gap-3 font-semibold"><Tick />Timeline &amp; Steps</p><p className="mt-2 pl-9 text-ink/70">{out.phases.join(" → ")}</p></div>
+            <div className="border-t border-ink/10 pt-4"><p className="font-mono text-xs text-accent">QUESTIONS TO SCOPE IT</p><ul className="mt-2 list-disc space-y-1 pl-5 text-ink/70">{out.q.map((m) => <li key={m}>{m}</li>)}</ul></div>
             <Button asChild><a href="#contact">Discuss This Project With Us <ArrowUpRight className="size-4" aria-hidden /></a></Button>
-          </motion.div>)}
+          </motion.div>
+        )}
       </div>
     </div>
   );

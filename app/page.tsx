@@ -57,9 +57,8 @@ export default function Home() {
           <Reveal className="mb-12"><Eyebrow>TECHNOLOGY</Eyebrow><h2 className="max-w-3xl text-balance font-serif text-4xl md:text-5xl">Built with the right technology. Engineered for what comes next.</h2></Reveal>
           <Ecosystem /></div></section>
 
-        <section id="assistant" className="mx-3 my-3 rounded-[28px] md:mx-4 bg-ink py-16 text-white md:py-28"><div className={wrap}>
-          <Reveal className="mb-10"><Eyebrow dark>PROJECT IDEA ASSISTANT</Eyebrow><h2 className="max-w-3xl text-balance font-serif text-4xl md:text-5xl">Have an idea? Let’s shape it.</h2></Reveal>
-          <Assistant /></div></section>
+        <section id="assistant" className="mx-3 my-3 overflow-hidden rounded-[28px] md:mx-4 bg-ink py-16 text-white md:py-28"><div className={wrap}>
+          <Reveal><Assistant /></Reveal></div></section>
 
         <section id="faq" className="mx-3 my-3 rounded-[28px] md:mx-4 bg-white py-16 md:py-28"><div className="mx-auto max-w-[800px] px-4 md:px-6">
           <Reveal><Eyebrow>FAQ</Eyebrow><h2 className="font-serif text-4xl md:text-5xl">Practical answers before you reach out.</h2></Reveal>
